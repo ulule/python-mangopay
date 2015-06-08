@@ -4,24 +4,27 @@ Usage
 Create an handler
 -----------------
 
-To manipulate resources (Users, Wallets, etc.) from this api you will have to
-instanciate a new handler which is a connection authentification.
+To manipulate resources (users, wallets, etc.) from this api you will have to
+instanciate a new handler which is a connection authentication.
 
 To create a new handler, you have to provide several parameters:
 
-* `MANGOPAY_CLIENT_ID`: Which is the client identifier used by `mangopay <http://www.mangopay.com/>`_ to identify you.
-* `MANGOPAY_PASSPHRASE`: This is your password.
+* **MANGOPAY_CLIENT_ID** - The client identifier used by `mangopay <http://www.mangopay.com/>`_ to identify you
+* **MANGOPAY_PASSPHRASE** - Your password
 
 API host
 --------
 
-The host used to call the API. We will see later
-when you are creating a new handler you can choose between
+The host used to call the API.
+
+We will see later when you are creating a new handler you can choose between
 multiple environment hosts already registered.
 
 Let's get to work, we will create our first handler with the sandbox host:
 
 .. code-block:: python
+
+    import mangopay
 
     mangopay.client_id='my client id'
     mangopay.passphrase='my password'
@@ -30,23 +33,23 @@ Let's get to work, we will create our first handler with the sandbox host:
 
     handler = APIRequest(sandbox=True)
 
-Now we have a new handler which is using the `sandbox host`.
+Now we have a new handler which is using the sandbox host.
 
-If you are not specifying that you are using the `sandbox host`
-nor an existing host, it will use the `production host`.
+If you are not specifying that you are using the sandbox host nor an existing host,
+it will use the production host by default.
 
 Using resources
 ---------------
 
-To manipulate resources, this library is heavily inspired from `peewee <https://github.com/coleifer/peewee/>`_,
-so every operations will be like manipulating an ORM.
+To manipulate your resources, this library is heavily inspired from `peewee <https://github.com/coleifer/peewee/>`_,
+so every operations will be like manipulating your favorite ORM.
 
-For required parameters you have to refer to the `reference api <https://docs.mangopay.com/api-references/>`_.
+For required parameters you can refer to the `reference api <https://docs.mangopay.com/api-references/>`_.
 
 User
 ----
 
-Create a natural user:
+Create a natural user
 
 .. code-block:: python
 
@@ -70,7 +73,7 @@ Create a natural user:
 
     print natural_user.get_pk() # retrieve the primary key
 
-Retrieve an existing user:
+Retrieve an existing user
 
 .. code-block:: python
 
@@ -78,7 +81,7 @@ Retrieve an existing user:
 
     print natural_user.first_name # Victor
 
-Detect an unexisting user:
+Detect a user which does not exist
 
 .. code-block:: python
 
@@ -87,14 +90,14 @@ Detect an unexisting user:
     except NaturalUser.DoesNotExist:
         print 'The natural user 2 does not exist'
 
-Retrieve all users:
+Retrieve all users
 
 .. code-block:: python
 
     users = User.all()
     print users  # [<NaturalUser: victor@hugo.com>, <LegalUser: support@ulule.com>]
 
-Retrieve users with a pagination:
+Retrieve users with a pagination
 
 .. code-block:: python
 
@@ -103,7 +106,7 @@ Retrieve users with a pagination:
 Wallet
 ------
 
-Create a wallet:
+Create a wallet
 
 .. code-block:: python
 
@@ -122,7 +125,7 @@ Create a wallet:
 
     print wallet.balance  # EUR 0.00
 
-Retrieve user's wallets:
+Retrieve user's wallets
 
 .. code-block:: python
 
@@ -133,7 +136,7 @@ Retrieve user's wallets:
 Transfer
 --------
 
-Create a transfer from a wallet to another one:
+Create a transfer from a wallet to another one
 
 .. code-block:: python
 
@@ -157,7 +160,7 @@ Create a transfer from a wallet to another one:
 Transfer refund
 ---------------
 
-Transfer money back to the wallet it came from (transfer refund):
+Transfer money back to the wallet where it came from (transfer refund)
 
 .. code-block:: python
 
@@ -177,19 +180,19 @@ Transfer money back to the wallet it came from (transfer refund):
 Transactions
 ------------
 
-Retrieve wallet's transactions:
+Retrieve wallet's transactions
 
 .. code-block:: python
 
     print legal_user_wallet.transactions.all()  # [<Transaction: Transaction n.1174821>]
 
-Retrieve user's transactions:
+Retrieve user's transactions
 
 .. code-block:: python
 
     print legal_user.transactions.all()  # [<Transaction: Transaction n.1174821>]
 
-List all transactions made by a user (you can filter transactions by status):
+List all transactions made by a user (you can filter transactions by status)
 
 .. code-block:: python
 
@@ -200,16 +203,16 @@ List all transactions made by a user (you can filter transactions by status):
 Card
 ----
 
-Register a card:
-
-To register a card for a user you have to create a RegistrationCard object with the user and his currency as params:
+To register a card for a user you have to create a RegistrationCard
+object with the user and his currency as params
 
 .. code-block:: python
 
     card_registration = CardRegistration(user=natural_user, currency='EUR')
     card_registration.save()
 
-Then, you have to retrieve user's cards details through a form and send them to the Mangopay Tokenization server.
+Then, you have to retrieve user's cards details through a form and
+send them to the Mangopay Tokenization server.
 
 Mandatory information are:
 
@@ -217,27 +220,28 @@ Mandatory information are:
 * The card CVX
 * The expiration date
 
-And as hidden field:
+And hidden field:
 
 * The access key ref
 * The preregistered data (from the `card_registration` instance you created just before)
 
 
-Update the `card_registration` instance with the response provided by the Mangopay Tokenization server:
+Update the `card_registration` instance with the response
+provided by the Mangopay Tokenization server.
 
 .. code-block:: python
 
     card_registration.registration_data = response
     card_registration.save()
 
-We now have a `card_id` and you can retrieve the new card:
+Now, we have a `card_id` and you can retrieve the new card
 
 .. code-block:: python
 
     print card_registration.card_id  # 1
     print card_registration.card  # CB_VISA_MASTERCARD of user 6641810
 
-Retrieve user's cards:
+Retrieve user's cards
 
 .. code-block:: python
 
@@ -248,7 +252,7 @@ Retrieve user's cards:
 PayIn
 -----
 
-Direct payment on a user's wallet:
+Direct payment on a user's wallet
 
 .. code-block:: python
 
@@ -267,7 +271,7 @@ Direct payment on a user's wallet:
 BankAccount
 -----------
 
-Register a bank account:
+Register a bank account
 
 .. code-block:: python
 
@@ -283,7 +287,7 @@ Register a bank account:
 BankWirePayIn
 -------------
 
-And pay by bank wire:
+And pay by bank wire
 
 .. code-block:: python
 
@@ -299,7 +303,7 @@ And pay by bank wire:
 Refund
 ------
 
-Refund a user on his payment card:
+Refund a user on his payment card
 
 .. code-block:: python
 
@@ -312,7 +316,7 @@ Refund a user on his payment card:
 PayOut
 ------
 
-Withdraw money from a wallet to a bank account:
+Withdraw money from a wallet to a bank account
 
 .. code-block:: python
 
@@ -328,16 +332,17 @@ Withdraw money from a wallet to a bank account:
 KYC (Know Your Customer) / Identification documents
 ---------------------------------------------------
 
-To get identification documents of your customers you need to:
+To get identification documents of your customers you will have to follow
+required steps.
 
-Create a Document:
+1. Create a Document
 
 .. code-block:: python
 
     document = Document(type='IDENTITY_PROOF', user=legal_user)
     document.save()
 
-Create a Page with uploaded file encoded in base64:
+2. Create a Page with uploaded file encoded in base64
 
 .. code-block:: python
 
@@ -347,7 +352,8 @@ Create a Page with uploaded file encoded in base64:
     page = Page(document=document, file=encoded_file, user=legal_user)
     page.save()
 
-To get a list of all the uploaded documents for a particular user:
+Once you have done with these steps, you will be able to get a list of all
+the uploaded documents for this particular user
 
 .. code-block:: python
 
@@ -362,7 +368,10 @@ To get the list of all the uploaded documents for all users:
 Sort and filter lists
 ---------------------
 
-To manage your lists you can pass filters and sorting parameters to the method `all`. See this example with a transaction list:
+To manage your lists you can pass filters and sorting parameters to
+the **all** method.
+
+For example with a transaction list:
 
 .. code-block:: python
 
@@ -371,6 +380,8 @@ To manage your lists you can pass filters and sorting parameters to the method `
                                    status='SUCCEEDED',
                                    sort='CreationDate:asc')
 
-`status` is a filter and `sort` a sorting parameter.
+* **status** - a specific filter
+* **sort** - a sorting parameter
 
-Please refer to the `documentation <https://docs.mangopay.com/api-references/sort-lists/>`_ to know how to format parameters.
+Please refer to the `documentation <https://docs.mangopay.com/api-references/sort-lists/>`_ 
+to know the specific format parameters.

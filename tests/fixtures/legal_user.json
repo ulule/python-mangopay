@@ -1,0 +1,21 @@
+{
+      "Name": "MangoPay",
+      "LegalPersonType": "BUSINESS",
+      "HeadquartersAddress": "1 rue MangoPay, Paris",
+      "LegalRepresentativeFirstName": "Mango",
+      "LegalRepresentativeLastName": "Pay",
+      "LegalRepresentativeEmail": "mango@mangopay.com",
+      "LegalRepresentativeBirthday": %d,
+      "LegalRepresentativeNationality": "FR",
+      "LegalRepresentativeCountryOfResidence": "FR",
+      "ProofOfRegistration": null,
+      "ShareholderDeclaration": null,
+      "LegalRepresentativeAddress": null,
+      "Statute": null,
+      "PersonType": "LEGAL",
+      "Email": "info@mangopay.com",
+      "Id": "1169420",
+      "Tag": "custom tag",
+      "CreationDate": 1383322502,
+      "KYCLevel": "LIGHT"
+}

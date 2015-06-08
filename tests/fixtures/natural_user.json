@@ -1,0 +1,18 @@
+{
+    "FirstName": "Victor",
+    "LastName": "Hugo",
+    "Address": "1 rue des Misérables, Paris",
+    "Birthday": %d,
+    "Nationality": "FR",
+    "CountryOfResidence": "FR",
+    "Occupation": "Writer",
+    "IncomeRange": 6,
+    "ProofOfIdentity": null,
+    "ProofOfAddress": null,
+    "PersonType": "NATURAL",
+    "Email": "victor@hugo.com",
+    "Id": "1169419",
+    "Tag": "custom tag",
+    "CreationDate": 1383321421,
+    "KYCLevel": "LIGHT"
+}

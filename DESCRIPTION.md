@@ -1,0 +1,1 @@
+python-mangopay is a client library for interacting with the Mangopay API.

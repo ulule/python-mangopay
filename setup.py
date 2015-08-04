@@ -9,7 +9,7 @@ with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
 
 setup(
     name='python-mangopay',
-    version='1.0.0',
+    version='1.0.0-alpha',
     description='A client library written in python to work with mangopay v2 api',
     long_description=long_description,
     url='https://github.com/ulule/python-mangopay',
@@ -17,16 +17,12 @@ setup(
     author_email='tech@ulule.com',
     license='MIT',
     classifiers=[
-        'Development Status :: 3',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
     ],
     keywords='mangopay api development',

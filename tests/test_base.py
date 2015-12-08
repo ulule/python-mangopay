@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from httplib2 import Http
+import requests
+
 from datetime import date
 from exam.decorators import fixture
 
@@ -10,11 +11,6 @@ from .resources import (NaturalUser, LegalUser, Wallet,
 
 import responses
 import time
-
-try:
-    import urllib.parse as urlrequest
-except ImportError:
-    import urllib as urlrequest
 
 
 _activate = responses.activate
@@ -114,16 +110,17 @@ class BaseTest(RegisteredMocks):
         card_registration = CardRegistration(**card_params)
         card_registration.save()
 
-        client = Http()
-        header, response = client.request(card_registration.card_registration_url, 'POST', urlrequest.urlencode({
+        self.mock_tokenization_request()
+
+        response = requests.post(card_registration.card_registration_url, data={
             'cardNumber': '4970100000000154',
             'cardCvx': '123',
             'cardExpirationDate': '0120',
             'accessKeyRef': card_registration.access_key,
             'data': card_registration.preregistration_data
-        }))
+        })
 
-        card_registration.registration_data = response
+        card_registration.registration_data = response.content
         card_registration.save()
 
         card = Card.get(card_registration.card.get_pk())
@@ -139,16 +136,17 @@ class BaseTest(RegisteredMocks):
         card_registration = CardRegistration(**card_params)
         card_registration.save()
 
-        client = Http()
-        header, response = client.request(card_registration.card_registration_url, 'POST', urlrequest.urlencode({
+        self.mock_tokenization_request()
+
+        response = requests.post(card_registration.card_registration_url, data={
             'cardNumber': '4970101122334422',
             'cardCvx': '123',
             'cardExpirationDate': '0120',
             'accessKeyRef': card_registration.access_key,
             'data': card_registration.preregistration_data
-        }))
+        })
 
-        card_registration.registration_data = response
+        card_registration.registration_data = response.content
         card_registration.save()
 
         card = Card.get(card_registration.card.get_pk())
@@ -164,16 +162,17 @@ class BaseTest(RegisteredMocks):
         card_registration = CardRegistration(**card_params)
         card_registration.save()
 
-        client = Http()
-        header, response = client.request(card_registration.card_registration_url, 'POST', urlrequest.urlencode({
+        self.mock_tokenization_request()
+
+        response = requests.post(card_registration.card_registration_url, data={
             'cardNumber': '4970101122334406',
             'cardCvx': '123',
             'cardExpirationDate': '0120',
             'accessKeyRef': card_registration.access_key,
             'data': card_registration.preregistration_data
-        }))
+        })
 
-        card_registration.registration_data = response
+        card_registration.registration_data = response.content
         card_registration.save()
 
         card = Card.get(card_registration.card.get_pk())

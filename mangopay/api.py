@@ -3,6 +3,7 @@ import requests
 import base64
 import time
 import logging
+import six
 
 import mangopay
 from .exceptions import APIError, DecodeError, AuthenticationError
@@ -104,7 +105,12 @@ class APIRequest(object):
         else:
             if result.content:
                 try:
-                    return result, json.loads(result.content)
+                    content = result.content
+
+                    if six.PY3:
+                        content = content.decode('utf-8')
+
+                    return result, json.loads(content)
                 except ValueError:
                     self._create_decodeerror(result, url=url)
             else:

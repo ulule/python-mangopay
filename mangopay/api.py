@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import requests
 import base64
 import time
@@ -47,6 +49,9 @@ class APIRequest(object):
         credentials = '%s:%s' % (self.my_client_id, self.my_passphrase)
         credentials = base64.b64encode(credentials.encode('ascii'))
 
+        if six.PY3:
+            credentials = credentials.decode('utf-8')
+
         return 'Basic %s' % credentials
 
     def request(self, method, url, data=None, **params):
@@ -64,7 +69,7 @@ class APIRequest(object):
 
         url = self._absolute_url(url, encoded_params)
 
-        logger.info(u'DATA[IN -> %s]\n\t- headers: %s\n\t- content: %s' % (url, headers, data))
+        logger.info('DATA[IN -> %s]\n\t- headers: %s\n\t- content: %s' % (url, headers, data))
 
         ts = time.time()
 
@@ -88,7 +93,7 @@ class APIRequest(object):
                               result=result,
                               laps=laps)
 
-        logger.info(u'DATA[OUT -> %s][%2.3f seconds]\n\t- status_code: %s\n\t- headers: %s\n\t- content: %s' % (
+        logger.info('DATA[OUT -> %s][%2.3f seconds]\n\t- status_code: %s\n\t- headers: %s\n\t- content: %s' % (
             url,
             laps,
             result.status_code,
@@ -134,7 +139,7 @@ class APIRequest(object):
 
         headers = result.headers
 
-        logger.error(u'API ERROR: status_code: %s | url: %s | method: %s | data: %r | headers: %s | content: %s' % (
+        logger.error('API ERROR: status_code: %s | url: %s | method: %s | data: %r | headers: %s | content: %s' % (
             status_code,
             url,
             method,
@@ -160,9 +165,9 @@ class APIRequest(object):
 
         headers = result.headers
 
-        logger.error(u'DECODE ERROR: status_code: %s | headers: %s | content: %s' % (status_code,
-                                                                                     headers,
-                                                                                     text))
+        logger.error('DECODE ERROR: status_code: %s | headers: %s | content: %s' % (status_code,
+                                                                                    headers,
+                                                                                    text))
 
         request_error.send(url=url, status_code=status_code, headers=headers)
 

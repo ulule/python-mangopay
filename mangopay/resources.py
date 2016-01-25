@@ -147,7 +147,7 @@ class Card(BaseModel):
     card_type = CharField(api_name='CardType',
                           choices=constants.CARD_TYPE_CHOICES,
                           default=None)
-    country = CharField(api_name='country')
+    country = CharField(api_name='Country')
     product = CharField(api_name='Product')
     bank_code = CharField(api_name='BankCode')
     active = BooleanField(api_name='Active')

@@ -330,6 +330,7 @@ class ManyToManyField(ListField):
 
     def api_value(self, value):
         from .base import BaseApiModel
+
         values = super(ManyToManyField, self).api_value(value)
 
         for i in range(len(values)):

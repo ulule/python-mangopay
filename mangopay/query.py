@@ -65,7 +65,8 @@ class SelectQuery(BaseQuery):
         cast = getattr(model, 'cast', lambda result: model)
         model_klass = cast(data)
 
-        return model_klass(**dict(self.parse_result(data, model_klass)))
+        return model_klass(handler=handler,
+                           **dict(self.parse_result(data, model_klass)))
 
     def list(self, reference, resource_model, handler=None):
         handler = handler or self.handler
@@ -74,7 +75,8 @@ class SelectQuery(BaseQuery):
                                        '/%s/%d/%s' % (resource_model._meta.verbose_name_plural, reference,
                                                       self.model._meta.verbose_name_plural))
 
-        return [self.model(**dict(self.parse_result(entry))) for entry in data]
+        return [self.model(handler=handler,
+                           **dict(self.parse_result(entry))) for entry in data]
 
     def all(self, handler=None, **params):
         handler = handler or self.handler
@@ -90,7 +92,7 @@ class SelectQuery(BaseQuery):
 
         for entry in data:
             model_klass = cast(entry)
-            results.append(model_klass(**dict(self.parse_result(entry))))
+            results.append(model_klass(handler=handler, **dict(self.parse_result(entry))))
 
         return results
 

@@ -145,7 +145,7 @@ class BaseApiModel(object):
 
     def __init__(self, *args, **kwargs):
         self._data = self._meta.get_default_dict()
-        self._handler = None
+        self._handler = kwargs.pop('handler', None)
 
         for k, v in kwargs.items():
             setattr(self, k, v)

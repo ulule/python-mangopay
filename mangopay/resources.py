@@ -100,7 +100,7 @@ class Wallet(BaseModel):
     owners = ManyToManyField(User, api_name='Owners', related_name='wallets', required=True)
     description = CharField(api_name='Description', required=True)
     currency = CharField(api_name='Currency', required=True)
-    balance = MoneyField(api_name='Balance', required=True)
+    balance = MoneyField(api_name='Balance')
     creation_date = DateField(api_name='CreationDate')
 
     class Meta:
@@ -479,6 +479,7 @@ class Page(KYC):
         return 'Page of document %s for user %s' % (self.document_id, self.user_id)
 
 
+@python_2_unicode_compatible
 class Transaction(BaseModel):
     author = ForeignKeyField(User, api_name='AuthorId', related_name='transactions')
     credited_user = ForeignKeyField(User, api_name='CreditedUserId')

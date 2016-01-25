@@ -120,8 +120,8 @@ class PayInsTest(BaseTest):
 
         direct_payin_params = {
             "author": self.card.user,
-            "debited_funds": Money(amount=100, currency='EUR'),
-            "fees": Money(amount=1, currency='EUR'),
+            "debited_funds": Money(amount=10000, currency='EUR'),
+            "fees": Money(amount=100, currency='EUR'),
             "credited_wallet": self.legal_user_wallet,
             "card": self.card,
             "secure_mode": "DEFAULT",
@@ -137,10 +137,10 @@ class PayInsTest(BaseTest):
         self.assertEqual(direct_payin.secure_mode_return_url, None)
         direct_payin_params.pop('secure_mode_return_url')
 
-        self.assertEqual(direct_payin.debited_funds.amount, 100)
+        self.assertEqual(direct_payin.debited_funds.amount, 10000)
         direct_payin_params.pop('debited_funds')
 
-        self.assertEqual(direct_payin.fees.amount, 1)
+        self.assertEqual(direct_payin.fees.amount, 100)
         direct_payin_params.pop('fees')
 
         for key, value in direct_payin_params.items():
@@ -157,7 +157,7 @@ class PayInsTest(BaseTest):
         self.assertEqual(getattr(payin, 'id'), direct_payin.get_pk())
 
         legal_user_wallet = Wallet.get(self.legal_user_wallet.get_pk())
-        self.assertEqual(legal_user_wallet.balance.amount, 99)
+        self.assertEqual(legal_user_wallet.balance.amount, 9900)
 
     @responses.activate
     def test_create_bank_wire_payins(self):
@@ -212,8 +212,8 @@ class PayInsTest(BaseTest):
             "tag": "Custom data",
             "credited_user": self.legal_user,
             "credited_wallet": self.legal_user_wallet,
-            "declared_debited_funds": Money(amount=10, currency='EUR'),
-            "declared_fees": Money(amount=1, currency='EUR')
+            "declared_debited_funds": Money(amount=1000, currency='EUR'),
+            "declared_fees": Money(amount=100, currency='EUR')
         }
         bank_wire_payin = BankWirePayIn(**bank_wire_payin_params)
 
@@ -222,10 +222,10 @@ class PayInsTest(BaseTest):
         self.assertIsInstance(bank_wire_payin, BankWirePayIn)
         self.assertEqual(bank_wire_payin.status, 'CREATED')
 
-        self.assertEqual(bank_wire_payin.declared_debited_funds.amount, 10)
+        self.assertEqual(bank_wire_payin.declared_debited_funds.amount, 1000)
         bank_wire_payin_params.pop('declared_debited_funds')
 
-        self.assertEqual(bank_wire_payin.declared_fees.amount, 1)
+        self.assertEqual(bank_wire_payin.declared_fees.amount, 100)
         bank_wire_payin_params.pop('declared_fees')
 
         for key, value in bank_wire_payin_params.items():
@@ -281,8 +281,8 @@ class PayInsTest(BaseTest):
 
         params = {
             "author": self.natural_user,
-            "debited_funds": Money(amount=100, currency='EUR'),
-            "fees": Money(amount=1, currency='EUR'),
+            "debited_funds": Money(amount=10000, currency='EUR'),
+            "fees": Money(amount=100, currency='EUR'),
             "credited_wallet": self.legal_user_wallet,
             "return_url": "http://www.ulule.com/",
             "template_url_options": {
@@ -301,10 +301,10 @@ class PayInsTest(BaseTest):
         self.assertTrue(card_payin.return_url.startswith('http://www.ulule.com/?transactionId='))
         params.pop('return_url')
 
-        self.assertEqual(card_payin.debited_funds.amount, 100)
+        self.assertEqual(card_payin.debited_funds.amount, 10000)
         params.pop('debited_funds')
 
-        self.assertEqual(card_payin.fees.amount, 1)
+        self.assertEqual(card_payin.fees.amount, 100)
         params.pop('fees')
 
         for key, value in params.items():
@@ -361,8 +361,8 @@ class PayInsTest(BaseTest):
 
         params = {
             "author": self.natural_user,
-            "debited_funds": Money(amount=100, currency='EUR'),
-            "fees": Money(amount=1, currency='EUR'),
+            "debited_funds": Money(amount=10000, currency='EUR'),
+            "fees": Money(amount=100, currency='EUR'),
             "credited_wallet": self.legal_user_wallet,
             "return_url": "http://www.ulule.com/",
             "template_url_options": {
@@ -380,10 +380,10 @@ class PayInsTest(BaseTest):
         self.assertTrue(card_payin.return_url.startswith('http://www.ulule.com/?transactionId='))
         params.pop('return_url')
 
-        self.assertEqual(card_payin.debited_funds.amount, 100)
+        self.assertEqual(card_payin.debited_funds.amount, 10000)
         params.pop('debited_funds')
 
-        self.assertEqual(card_payin.fees.amount, 1)
+        self.assertEqual(card_payin.fees.amount, 100)
         params.pop('fees')
 
         for key, value in params.items():

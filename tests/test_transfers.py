@@ -148,8 +148,8 @@ class TransfersTest(BaseTest):
 
         direct_payin_params = {
             "author": self.card.user,
-            "debited_funds": Money(amount=100, currency='EUR'),
-            "fees": Money(amount=1, currency='EUR'),
+            "debited_funds": Money(amount=10000, currency='EUR'),
+            "fees": Money(amount=100, currency='EUR'),
             "credited_wallet": wallet,
             "card": self.card,
             "secure_mode": "DEFAULT",
@@ -161,8 +161,8 @@ class TransfersTest(BaseTest):
         params = {
             "author": self.card.user,
             "credited_user": self.legal_user,
-            "debited_funds": Money(amount=10, currency='EUR'),
-            "fees": Money(amount=1, currency='EUR'),
+            "debited_funds": Money(amount=1000, currency='EUR'),
+            "fees": Money(amount=100, currency='EUR'),
             "debited_wallet": wallet,
             "credited_wallet": self.legal_user_wallet,
             "tag": "custom tag"
@@ -175,10 +175,10 @@ class TransfersTest(BaseTest):
 
         self.assertEqual(transfer.status, 'SUCCEEDED')
 
-        self.assertEqual(direct_payin.debited_funds.amount, 100)
+        self.assertEqual(direct_payin.debited_funds.amount, 10000)
         direct_payin_params.pop('debited_funds')
 
-        self.assertEqual(direct_payin.fees.amount, 1)
+        self.assertEqual(direct_payin.fees.amount, 100)
         direct_payin_params.pop('fees')
 
         for key, value in params.items():

@@ -94,8 +94,8 @@ class PayOutsTest(BaseTest):
         bank_wire_payout_params = {
             "tag": "Custom data",
             "author": self.legal_user,
-            "debited_funds": Money(amount=10, currency='EUR'),
-            "fees": Money(amount=1, currency='EUR'),
+            "debited_funds": Money(amount=1000, currency='EUR'),
+            "fees": Money(amount=100, currency='EUR'),
             "debited_wallet": self.legal_user_wallet,
             "bank_account": bankaccount,
             "bank_wire_ref": "John Doe's trousers"
@@ -106,10 +106,10 @@ class PayOutsTest(BaseTest):
         bank_wire_payout.save()
         self.assertIsInstance(bank_wire_payout, PayOut)
 
-        self.assertEqual(bank_wire_payout.debited_funds.amount, 10)
+        self.assertEqual(bank_wire_payout.debited_funds.amount, 1000)
         bank_wire_payout_params.pop('debited_funds')
 
-        self.assertEqual(bank_wire_payout.fees.amount, 1)
+        self.assertEqual(bank_wire_payout.fees.amount, 100)
         bank_wire_payout_params.pop('fees')
 
         for key, value in bank_wire_payout_params.items():

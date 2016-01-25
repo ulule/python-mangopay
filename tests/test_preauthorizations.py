@@ -186,7 +186,7 @@ class PreAuthorizationsTest(BaseTest):
         params = {
             "author": self.card.user,
             "card": self.card,
-            "debited_funds": Money(amount=100, currency='EUR'),
+            "debited_funds": Money(amount=10000, currency='EUR'),
             "secure_mode": "DEFAULT",
             "secure_mode_return_url": "http://www.ulule.com/"
         }
@@ -202,7 +202,7 @@ class PreAuthorizationsTest(BaseTest):
         self.assertEqual(preauthorization.secure_mode_return_url, None)
         params.pop('secure_mode_return_url')
 
-        self.assertEqual(preauthorization.debited_funds.amount, 100)
+        self.assertEqual(preauthorization.debited_funds.amount, 10000)
         params.pop('debited_funds')
 
         for key, value in params.items():
@@ -313,7 +313,7 @@ class PreAuthorizationsTest(BaseTest):
         params = {
             "author": self.card.user,
             "card": self.card,
-            "debited_funds": Money(amount=100, currency='EUR'),
+            "debited_funds": Money(amount=10000, currency='EUR'),
             "secure_mode": "DEFAULT",
             "secure_mode_return_url": "https://www.mysite.com/secure?preAuthorizationId=1209003"
         }
@@ -331,7 +331,7 @@ class PreAuthorizationsTest(BaseTest):
         self.assertEqual(preauthorization.secure_mode_return_url, None)
         params.pop('secure_mode_return_url')
 
-        self.assertEqual(preauthorization.debited_funds.amount, 100)
+        self.assertEqual(preauthorization.debited_funds.amount, 10000)
         params.pop('debited_funds')
 
         for key, value in params.items():
@@ -435,7 +435,7 @@ class PreAuthorizationsTest(BaseTest):
         params = {
             "author": self.card.user,
             "card": self.card,
-            "debited_funds": Money(amount=100, currency='EUR'),
+            "debited_funds": Money(amount=10000, currency='EUR'),
             "secure_mode": "DEFAULT",
             "secure_mode_return_url": "https://www.mysite.com/secure?preAuthorizationId=1209003"
         }
@@ -444,7 +444,7 @@ class PreAuthorizationsTest(BaseTest):
 
         params = {
             "author": self.card.user,
-            "debited_funds": Money(amount=100, currency='EUR'),
+            "debited_funds": Money(amount=10000, currency='EUR'),
             "fees": Money(amount=1, currency='EUR'),
             "credited_wallet": self.legal_user_wallet,
             "preauthorization": preauthorization,
@@ -459,10 +459,10 @@ class PreAuthorizationsTest(BaseTest):
         self.assertTrue(preauthorized_payin.secure_mode_return_url, "https://www.mysite.com/secure?preAuthorizationId=")
         params.pop('secure_mode_return_url')
 
-        self.assertEqual(preauthorized_payin.debited_funds.amount, 100)
+        self.assertEqual(preauthorized_payin.debited_funds.amount, 10000)
         params.pop('debited_funds')
 
-        self.assertEqual(preauthorized_payin.fees.amount, 1)
+        self.assertEqual(preauthorized_payin.fees.amount, 100)
         params.pop('fees')
 
         for key, value in params.items():
@@ -570,7 +570,7 @@ class PreAuthorizationsTest(BaseTest):
         params = {
             "author": self.card.user,
             "card": self.card,
-            "debited_funds": Money(amount=100, currency='EUR'),
+            "debited_funds": Money(amount=10000, currency='EUR'),
             "secure_mode": "DEFAULT",
             "secure_mode_return_url": "http://www.ulule.com/"
         }
@@ -582,7 +582,7 @@ class PreAuthorizationsTest(BaseTest):
 
         params = {
             "author": self.card.user,
-            "debited_funds": Money(amount=300, currency='EUR'),  # Amount is too high
+            "debited_funds": Money(amount=30000, currency='EUR'),  # Amount is too high
             "fees": Money(amount=1, currency='EUR'),
             "credited_wallet": self.legal_user_wallet,
             "preauthorization": preauthorization,

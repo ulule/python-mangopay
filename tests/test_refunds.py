@@ -89,7 +89,7 @@ class RefundsTest(BaseTest):
         direct_payin.save()
 
         legal_user_wallet = Wallet.get(self.legal_user_wallet.get_pk())
-        self.assertEqual(legal_user_wallet.balance.amount, 99)
+        self.assertEqual(legal_user_wallet.balance.amount, 9900)
 
         # Create a transfer (from legal_user_wallet to natural_user_wallet)
         responses.reset()
@@ -146,10 +146,10 @@ class RefundsTest(BaseTest):
         self.assertEqual(transfer.status, 'SUCCEEDED')
 
         natural_user_wallet = Wallet.get(self.natural_user_wallet.get_pk())
-        self.assertEqual(natural_user_wallet.balance.amount, 9)
+        self.assertEqual(natural_user_wallet.balance.amount, 900)
 
         legal_user_wallet = Wallet.get(self.legal_user_wallet.get_pk())
-        self.assertEqual(legal_user_wallet.balance.amount, 89)
+        self.assertEqual(legal_user_wallet.balance.amount, 8900)
 
         # Test transfer refund
         responses.reset()
@@ -248,7 +248,7 @@ class RefundsTest(BaseTest):
         self.assertEqual(natural_user_wallet.balance.amount, 0)
 
         legal_user_wallet = Wallet.get(self.legal_user_wallet.get_pk())
-        self.assertEqual(legal_user_wallet.balance.amount, 99)
+        self.assertEqual(legal_user_wallet.balance.amount, 9900)
 
         for key, value in params.items():
             self.assertEqual(getattr(transfer_refund, key), value)
@@ -341,7 +341,7 @@ class RefundsTest(BaseTest):
         self.assertEqual(direct_payin.status, 'SUCCEEDED')
 
         legal_user_wallet = Wallet.get(self.legal_user_wallet.get_pk())
-        self.assertEqual(legal_user_wallet.balance.amount, 99)
+        self.assertEqual(legal_user_wallet.balance.amount, 9900)
 
         responses.reset()
         self.mock_legal_user_wallet()

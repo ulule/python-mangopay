@@ -182,7 +182,7 @@ class EmailField(CharField):
 class MoneyField(Field):
     def python_value(self, value):
         if value is not None:
-            return Money(currency=value['Currency'], amount=(int(value['Amount']) / 100.0))
+            return Money(currency=value['Currency'], amount=value['Amount'])
 
         return value
 
@@ -192,7 +192,7 @@ class MoneyField(Field):
         if isinstance(value, Money):
             value = {
                 'Currency': value.currency,
-                'Amount': int(value.amount) * 100.0
+                'Amount': value.amount
             }
 
         return value

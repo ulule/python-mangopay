@@ -185,8 +185,8 @@ class TransactionsTest(BaseTest):
         params = {
             "author": self.legal_user,
             "credited_user": self.natural_user,
-            "debited_funds": Money(amount=10, currency='EUR'),
-            "fees": Money(amount=1, currency='EUR'),
+            "debited_funds": Money(amount=1000, currency='EUR'),
+            "fees": Money(amount=100, currency='EUR'),
             "debited_wallet": self.legal_user_wallet,
             "credited_wallet": self.natural_user_wallet,
             "tag": "custom tag"

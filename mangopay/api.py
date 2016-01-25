@@ -36,17 +36,17 @@ class APIRequest(object):
         else:
             self.api_url = api_url or mangopay.api_url
 
-        self.my_client_id = client_id or mangopay.client_id
-        self.my_passphrase = passphrase or mangopay.passphrase
+        self.client_id = client_id or mangopay.client_id
+        self.passphrase = passphrase or mangopay.passphrase
 
     def _authorization(self):
-        if self.my_client_id is None or self.my_passphrase is None:
+        if self.client_id is None or self.passphrase is None:
             raise AuthenticationError(
                 'Authentication failed. (Please set your Mangopay API username '
                 'and password using "mangopay.client_id = CLIENT_ID" '
                 'and "mangopay.passphrase = PASSPHRASE").')
 
-        credentials = '%s:%s' % (self.my_client_id, self.my_passphrase)
+        credentials = '%s:%s' % (self.client_id, self.passphrase)
         credentials = base64.b64encode(credentials.encode('ascii'))
 
         if six.PY3:
@@ -130,7 +130,7 @@ class APIRequest(object):
         return pattern % (self.api_url, self._construct_api_url(url), encoded_params)
 
     def _construct_api_url(self, relative_url):
-        return '%s%s' % (self.my_client_id, relative_url)
+        return '%s%s' % (self.client_id, relative_url)
 
     def _create_apierror(self, result, url=None, data=None, method=None):
         text = result.text if hasattr(result, 'text') else result.content

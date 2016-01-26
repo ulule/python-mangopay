@@ -173,7 +173,7 @@ class BaseApiModel(object):
                 other.get_pk() == self.get_pk())
 
     def save(self, handler=None, cls=None):
-        handler = handler or self.handler
+        self._handler = handler or self.handler
 
         field_dict = dict(self._data)
         field_dict.update(self.get_field_dict())

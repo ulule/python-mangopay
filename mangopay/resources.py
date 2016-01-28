@@ -224,7 +224,10 @@ class DirectPayIn(PayIn):
     class Meta:
         verbose_name = 'payin'
         verbose_name_plural = 'payins'
-        url = '/payins/card/direct'
+        url = {
+            InsertQuery.identifier: '/payins/card/direct',
+            SelectQuery.identifier: '/payins'
+        }
 
     def __str__(self):
         return 'Direct Payin: %s to %s' % (self.author_id, self.credited_user_id)
@@ -242,13 +245,16 @@ class BankWirePayIn(PayIn):
     class Meta:
         verbose_name = 'payin'
         verbose_name_plural = 'payins'
-        url = '/payins/bankwire/direct'
+        url = {
+            InsertQuery.identifier: '/payins/bankwire/direct',
+            SelectQuery.identifier: '/payins'
+        }
 
     def __str__(self):
         return 'Bank Wire Payin: %s to %s' % (self.author_id, self.credited_user_id)
 
 
-class CardViaWebTemplatePayIn(PayIn):
+class CardWebPayIn(PayIn):
     author = ForeignKeyField(User, api_name='AuthorId', required=True)
     credited_wallet = ForeignKeyField(Wallet, api_name='CreditedWalletId', required=True)
     return_url = CharField(api_name='ReturnURL')
@@ -263,10 +269,13 @@ class CardViaWebTemplatePayIn(PayIn):
     class Meta:
         verbose_name = 'card_payin'
         verbose_name_plural = 'card_payins'
-        url = '/payins/card/web'
+        url = {
+            InsertQuery.identifier: '/payins/card/web',
+            SelectQuery.identifier: '/payins'
+        }
 
 
-class DirectDebitViaWebTemplatePayIn(PayIn):
+class DirectDebitWebPayIn(PayIn):
     author = ForeignKeyField(User, api_name='AuthorId', required=True)
     credited_wallet = ForeignKeyField(Wallet, api_name='CreditedWalletId', required=True)
     return_url = CharField(api_name='ReturnURL')
@@ -279,7 +288,10 @@ class DirectDebitViaWebTemplatePayIn(PayIn):
     class Meta:
         verbose_name = 'direct_debit_payin'
         verbose_name_plural = 'direct_debit_payins'
-        url = '/payins/directdebit/web'
+        url = {
+            InsertQuery.identifier: '/payins/directdebit/web',
+            SelectQuery.identifier: '/payins'
+        }
 
 
 class PreAuthorization(BaseModel):
@@ -324,7 +336,10 @@ class PreAuthorizedPayIn(PayIn):
     class Meta:
         verbose_name = 'preauthorized_payin'
         verbose_name_plural = 'preauthorized_payins'
-        url = '/payins/PreAuthorized/direct'
+        url = {
+            InsertQuery.identifier: '/payins/PreAuthorized/direct',
+            SelectQuery.identifier: '/payins'
+        }
 
 
 @python_2_unicode_compatible

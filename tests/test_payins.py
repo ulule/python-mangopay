@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from .resources import (Wallet, PayIn, DirectPayIn, BankWirePayIn,
-                        CardViaWebTemplatePayIn, DirectDebitViaWebTemplatePayIn)
+                        CardWebPayIn, DirectDebitWebPayIn)
 from .test_base import BaseTest
 
 from mangopay.utils import Money
@@ -292,11 +292,11 @@ class PayInsTest(BaseTest):
             "card_type": "CB_VISA_MASTERCARD",
             "secure_mode": "DEFAULT"
         }
-        card_payin = CardViaWebTemplatePayIn(**params)
+        card_payin = CardWebPayIn(**params)
 
         self.assertIsNone(card_payin.get_pk())
         card_payin.save()
-        self.assertIsInstance(card_payin, CardViaWebTemplatePayIn)
+        self.assertIsInstance(card_payin, CardWebPayIn)
 
         self.assertTrue(card_payin.return_url.startswith('http://www.ulule.com/?transactionId='))
         params.pop('return_url')
@@ -371,11 +371,11 @@ class PayInsTest(BaseTest):
             "culture": "FR",
             "direct_debit_type": "GIROPAY"
         }
-        card_payin = DirectDebitViaWebTemplatePayIn(**params)
+        card_payin = DirectDebitWebPayIn(**params)
 
         self.assertIsNone(card_payin.get_pk())
         card_payin.save()
-        self.assertIsInstance(card_payin, DirectDebitViaWebTemplatePayIn)
+        self.assertIsInstance(card_payin, DirectDebitWebPayIn)
 
         self.assertTrue(card_payin.return_url.startswith('http://www.ulule.com/?transactionId='))
         params.pop('return_url')

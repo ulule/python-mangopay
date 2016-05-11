@@ -449,7 +449,10 @@ class PayInRefund(Refund):
     class Meta:
         verbose_name = 'refund'
         verbose_name_plural = 'refunds'
-        url = '/payins/%(payin_id)s/refunds'
+        url = {
+            InsertQuery.identifier: '/payins/%(payin_id)s/refunds',
+            SelectQuery.identifier: '/refunds'
+        }
 
     def __str__(self):
         return 'PayInRefund request from user %s' % self.author_id

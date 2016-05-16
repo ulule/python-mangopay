@@ -376,7 +376,7 @@ class BankAccount(BaseModel):
 
 
 @python_2_unicode_compatible
-class PayOut(BaseModel):
+class BankWirePayOut(BaseModel):
     author = ForeignKeyField(User, api_name='AuthorId', required=True)
     fees = MoneyField(api_name='Fees', required=True)
     credited_funds = MoneyField(api_name='CreditedFunds', required=True)

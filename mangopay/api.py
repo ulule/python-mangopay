@@ -81,8 +81,15 @@ class APIRequest(object):
             result = requests_session.request(method, url,
                                               data=data,
                                               headers=headers)
-        except ConnectionError:
-            reraise_as(APIError)
+        except ConnectionError as e:
+            msg = '{}'.format(e)
+
+            if msg:
+                msg = '%s: %s' % (type(e).__name__, msg)
+            else:
+                msg = type(e).__name__
+
+            reraise_as(APIError(msg))
 
         laps = time.time() - ts
 

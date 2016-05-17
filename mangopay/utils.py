@@ -1,7 +1,12 @@
 # see: http://hustoknow.blogspot.com/2011/01/m2crypto-and-facebook-python-sdk.html
 from __future__ import unicode_literals
 
+import datetime
+import decimal
+import copy
+import inspect
 import six
+import sys
 
 from functools import wraps
 from .exceptions import CurrencyMismatch
@@ -15,10 +20,6 @@ elif six.PY2:
     import urllib
     orig = urllib.URLopener.open_https
     urllib.URLopener.open_https = orig
-
-import datetime
-import decimal
-import copy
 
 
 @python_2_unicode_compatible
@@ -341,7 +342,7 @@ def timestamp_from_date(date):
 if six.PY3:
     memoryview = memoryview
 else:
-    memoryview = buffer
+    memoryview = buffer  # noqa
 
 
 def is_protected_type(obj):
@@ -451,3 +452,30 @@ def memoize(func, cache, num_args):
         cache[mem_args] = result
         return result
     return wrapper
+
+
+def reraise_as(new_exception_or_type):
+    """
+    Obtained from https://github.com/dcramer/reraise/blob/master/src/reraise.py
+    >>> try:
+    >>>     do_something_crazy()
+    >>> except Exception:
+    >>>     reraise_as(UnhandledException)
+    """
+    __traceback_hide__ = True  # NOQA
+
+    e_type, e_value, e_traceback = sys.exc_info()
+
+    if inspect.isclass(new_exception_or_type):
+        new_type = new_exception_or_type
+        new_exception = new_exception_or_type()
+    else:
+        new_type = type(new_exception_or_type)
+        new_exception = new_exception_or_type
+
+    new_exception.__cause__ = e_value
+
+    try:
+        six.reraise(new_type, new_exception, e_traceback)
+    finally:
+        del e_traceback

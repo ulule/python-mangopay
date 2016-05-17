@@ -10,6 +10,7 @@ import six
 import mangopay
 from .exceptions import APIError, DecodeError, AuthenticationError
 from .signals import request_finished, request_started, request_error
+from .utils import reraise_as
 
 from requests.exceptions import ConnectionError
 
@@ -80,8 +81,8 @@ class APIRequest(object):
             result = requests_session.request(method, url,
                                               data=data,
                                               headers=headers)
-        except ConnectionError as e:
-            raise APIError(e.message)
+        except ConnectionError:
+            reraise_as(APIError)
 
         laps = time.time() - ts
 

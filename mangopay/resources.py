@@ -368,7 +368,7 @@ class BankAccount(BaseModel):
         verbose_name_plural = 'bankaccounts'
         url = {
             InsertQuery.identifier: '/users/%(user_id)s/bankaccounts/%(type)s',
-            SelectQuery.identifier: '/users/%(user_id)s/bankaccounts'
+            SelectQuery.identifier: '/users/%(user_id)s/bankaccounts',
         }
 
     def __str__(self):

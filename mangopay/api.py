@@ -25,7 +25,7 @@ except ImportError:
     import json
 
 
-logger = logging.getLogger('leetchi')
+logger = logging.getLogger('mangopay')
 
 requests_session = requests.Session()
 

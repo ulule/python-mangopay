@@ -468,7 +468,7 @@ class KYC(BaseModel):
 
 @python_2_unicode_compatible
 class Document(KYC):
-    user = ForeignKeyField(User, related_name='documents')
+    user = ForeignKeyField(User, related_name='documents', api_name='UserId')
     type = CharField(api_name='Type', choices=constants.DOCUMENTS_TYPE_CHOICES, default=None)
     status = CharField(api_name='Status', choices=constants.DOCUMENTS_STATUS_CHOICES, default=None)
     refused_reason_type = CharField(api_name='RefusedReasonType')

@@ -479,3 +479,11 @@ def reraise_as(new_exception_or_type):
         six.reraise(new_type, new_exception, e_traceback)
     finally:
         del e_traceback
+
+
+def truncatechars(value, length=255):
+    if isinstance(value, dict):
+        for k, v in value.items():
+            value[k] = truncatechars(v)
+    elif isinstance(value, six.string_types):
+        return (value[:length] + '...') if len(value) > length else value

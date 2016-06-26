@@ -487,3 +487,5 @@ def truncatechars(value, length=255):
             value[k] = truncatechars(v)
     elif isinstance(value, six.string_types):
         return (value[:length] + '...') if len(value) > length else value
+
+    return value

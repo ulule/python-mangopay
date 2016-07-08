@@ -192,7 +192,7 @@ class MoneyField(Field):
         if isinstance(value, Money):
             value = {
                 'Currency': value.currency,
-                'Amount': value.amount
+                'Amount': int(value.amount)
             }
 
         return value

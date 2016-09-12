@@ -434,7 +434,10 @@ class TransferRefund(Refund):
     class Meta:
         verbose_name = 'refund'
         verbose_name_plural = 'refunds'
-        url = '/transfers/%(transfer_id)s/refunds'
+        url = {
+            InsertQuery.identifier: '/transfers/%(transfer_id)s/refunds',
+            SelectQuery.identifier: '/refunds'
+        }
 
     def __str__(self):
         return 'TransferRefund request from user %s' % self.author_id

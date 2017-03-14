@@ -1,0 +1,262 @@
+[
+  {
+    "ContestDeadlineDate": 1471564800,
+    "ContestedFunds": {
+      "Amount": 10000,
+      "Currency": "EUR"
+    },
+    "CreationDate": 1469717512,
+    "DisputeReason": {
+      "DisputeReasonMessage": null,
+      "DisputeReasonType": "FRAUD"
+    },
+    "DisputeType": "NOT_CONTESTABLE",
+    "DisputedFunds": {
+      "Amount": 10000,
+      "Currency": "EUR"
+    },
+    "Id": "64462718",
+    "InitialTransactionId": "62283678",
+    "InitialTransactionType": "PAYIN",
+    "RepudiationId": "64462723",
+    "ResultCode": "LOST",
+    "ResultMessage": null,
+    "Status": "CLOSED",
+    "StatusMessage": null,
+    "Tag": null
+  },
+  {
+    "ContestDeadlineDate": 1472428800,
+    "ContestedFunds": {
+      "Amount": 10000,
+      "Currency": "EUR"
+    },
+    "CreationDate": 1470401085,
+    "DisputeReason": {
+      "DisputeReasonMessage": null,
+      "DisputeReasonType": "FRAUD"
+    },
+    "DisputeType": "CONTESTABLE",
+    "DisputedFunds": {
+      "Amount": 10000,
+      "Currency": "EUR"
+    },
+    "Id": "65845642",
+    "InitialTransactionId": "62287227",
+    "InitialTransactionType": "PAYIN",
+    "RepudiationId": "65845644",
+    "ResultCode": "LOST",
+    "ResultMessage": null,
+    "Status": "CLOSED",
+    "StatusMessage": null,
+    "Tag": null
+  },
+  {
+    "ContestDeadlineDate": 1472428800,
+    "ContestedFunds": {
+      "Amount": 10000,
+      "Currency": "EUR"
+    },
+    "CreationDate": 1470401098,
+    "DisputeReason": {
+      "DisputeReasonMessage": null,
+      "DisputeReasonType": "FRAUD"
+    },
+    "DisputeType": "CONTESTABLE",
+    "DisputedFunds": {
+      "Amount": 10000,
+      "Currency": "EUR"
+    },
+    "Id": "65845673",
+    "InitialTransactionId": "62286735",
+    "InitialTransactionType": "PAYIN",
+    "RepudiationId": "65845675",
+    "ResultCode": "LOST",
+    "ResultMessage": null,
+    "Status": "CLOSED",
+    "StatusMessage": null,
+    "Tag": null
+  },
+  {
+    "ContestDeadlineDate": 1472774400,
+    "ContestedFunds": {
+      "Amount": 70000,
+      "Currency": "EUR"
+    },
+    "CreationDate": 1470819424,
+    "DisputeReason": {
+      "DisputeReasonMessage": null,
+      "DisputeReasonType": "FRAUD"
+    },
+    "DisputeType": "NOT_CONTESTABLE",
+    "DisputedFunds": {
+      "Amount": 70000,
+      "Currency": "EUR"
+    },
+    "Id": "66549843",
+    "InitialTransactionId": "64726527",
+    "InitialTransactionType": "PAYIN",
+    "RepudiationId": "66549850",
+    "ResultCode": "LOST",
+    "ResultMessage": null,
+    "Status": "CLOSED",
+    "StatusMessage": null,
+    "Tag": null
+  },
+  {
+    "ContestDeadlineDate": 1472774400,
+    "ContestedFunds": {
+      "Amount": 30000,
+      "Currency": "EUR"
+    },
+    "CreationDate": 1470819922,
+    "DisputeReason": {
+      "DisputeReasonMessage": null,
+      "DisputeReasonType": "FRAUD"
+    },
+    "DisputeType": "NOT_CONTESTABLE",
+    "DisputedFunds": {
+      "Amount": 30000,
+      "Currency": "EUR"
+    },
+    "Id": "66552293",
+    "InitialTransactionId": "65106918",
+    "InitialTransactionType": "PAYIN",
+    "RepudiationId": "66552297",
+    "ResultCode": "LOST",
+    "ResultMessage": null,
+    "Status": "CLOSED",
+    "StatusMessage": null,
+    "Tag": null
+  },
+  {
+    "ContestDeadlineDate": 1472774400,
+    "ContestedFunds": {
+      "Amount": 100000,
+      "Currency": "EUR"
+    },
+    "CreationDate": 1470820193,
+    "DisputeReason": {
+      "DisputeReasonMessage": null,
+      "DisputeReasonType": "FRAUD"
+    },
+    "DisputeType": "NOT_CONTESTABLE",
+    "DisputedFunds": {
+      "Amount": 100000,
+      "Currency": "EUR"
+    },
+    "Id": "66553218",
+    "InitialTransactionId": "65108415",
+    "InitialTransactionType": "PAYIN",
+    "RepudiationId": "66553220",
+    "ResultCode": "LOST",
+    "ResultMessage": null,
+    "Status": "CLOSED",
+    "StatusMessage": null,
+    "Tag": null
+  },
+  {
+    "ContestDeadlineDate": 1473120000,
+    "ContestedFunds": {
+      "Amount": 100000,
+      "Currency": "EUR"
+    },
+    "CreationDate": 1471338211,
+    "DisputeReason": {
+      "DisputeReasonMessage": null,
+      "DisputeReasonType": "FRAUD"
+    },
+    "DisputeType": "NOT_CONTESTABLE",
+    "DisputedFunds": {
+      "Amount": 100000,
+      "Currency": "EUR"
+    },
+    "Id": "67381413",
+    "InitialTransactionId": "65133407",
+    "InitialTransactionType": "PAYIN",
+    "RepudiationId": "67381416",
+    "ResultCode": "LOST",
+    "ResultMessage": null,
+    "Status": "CLOSED",
+    "StatusMessage": null,
+    "Tag": null
+  },
+  {
+    "ContestDeadlineDate": 1473638400,
+    "ContestedFunds": {
+      "Amount": 25000,
+      "Currency": "EUR"
+    },
+    "CreationDate": 1471350566,
+    "DisputeReason": {
+      "DisputeReasonMessage": null,
+      "DisputeReasonType": "FRAUD"
+    },
+    "DisputeType": "CONTESTABLE",
+    "DisputedFunds": {
+      "Amount": 25000,
+      "Currency": "EUR"
+    },
+    "Id": "67416340",
+    "InitialTransactionId": "62832619",
+    "InitialTransactionType": "PAYIN",
+    "RepudiationId": "67416346",
+    "ResultCode": "LOST",
+    "ResultMessage": null,
+    "Status": "CLOSED",
+    "StatusMessage": null,
+    "Tag": null
+  },
+  {
+    "ContestDeadlineDate": 1475366400,
+    "ContestedFunds": {
+      "Amount": 50000,
+      "Currency": "EUR"
+    },
+    "CreationDate": 1471521777,
+    "DisputeReason": {
+      "DisputeReasonMessage": null,
+      "DisputeReasonType": "FRAUD"
+    },
+    "DisputeType": "NOT_CONTESTABLE",
+    "DisputedFunds": {
+      "Amount": 50000,
+      "Currency": "EUR"
+    },
+    "Id": "67751339",
+    "InitialTransactionId": "65191432",
+    "InitialTransactionType": "PAYIN",
+    "RepudiationId": "67751341",
+    "ResultCode": "LOST",
+    "ResultMessage": null,
+    "Status": "CLOSED",
+    "StatusMessage": null,
+    "Tag": null
+  },
+  {
+    "ContestDeadlineDate": 1475366400,
+    "ContestedFunds": {
+      "Amount": 29300,
+      "Currency": "EUR"
+    },
+    "CreationDate": 1471522114,
+    "DisputeReason": {
+      "DisputeReasonMessage": null,
+      "DisputeReasonType": "FRAUD"
+    },
+    "DisputeType": "NOT_CONTESTABLE",
+    "DisputedFunds": {
+      "Amount": 29300,
+      "Currency": "EUR"
+    },
+    "Id": "67752427",
+    "InitialTransactionId": "65136537",
+    "InitialTransactionType": "PAYIN",
+    "RepudiationId": "67752433",
+    "ResultCode": "LOST",
+    "ResultMessage": null,
+    "Status": "CLOSED",
+    "StatusMessage": null,
+    "Tag": null
+  }
+]

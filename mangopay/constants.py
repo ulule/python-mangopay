@@ -126,3 +126,24 @@ DIRECT_DEBIT_TYPE_CHOICES = Choices(
     ('ELV', 'elv', 'ELV'),
     ('GIROPAY', 'giropay', 'Giropay')
 )
+
+TRANSACTION_TYPE_CHOICES = Choices(
+    ('PAYIN', 'payin', 'Pay In'),
+    ('PAYOUT', 'payout', 'Pay out'),
+    ('TRANSFER', 'transfer', 'Transfer')
+)
+
+DISPUTES_STATUS_CHOICES = Choices(
+    ('CREATED', 'created', 'Created'),
+    ('PENDING_CLIENT_ACTION', 'pending_client_action', 'Pending Client Action'),
+    ('SUBMITTED', 'submitted', 'Submitted'),
+    ('PENDING_BANK_ACTION', 'pending_bank_action', 'Pending Bank Action'),
+    ('REOPENED_PENDING_CLIENT_ACTION', 'reopened_pending_client_action', 'Reopened Pending Client Action'),
+    ('CLOSED', 'closed', 'Closed')
+)
+
+DISPUTE_TYPE_CHOICE = Choices(
+    ('CONTESTABLE', 'contestable', 'Contestable'),
+    ('NOT_CONTESTABLE', 'not_contestable', 'Not Contestable'),
+    ('RETRIEVAL', 'retrieval', 'Retrieval')
+)

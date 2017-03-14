@@ -3,7 +3,7 @@ import time
 import datetime
 import six
 
-from .utils import timestamp_from_datetime, timestamp_from_date, Money
+from .utils import timestamp_from_datetime, timestamp_from_date, Money, Reason
 import sys
 
 
@@ -193,6 +193,25 @@ class MoneyField(Field):
             value = {
                 'Currency': value.currency,
                 'Amount': int(value.amount)
+            }
+
+        return value
+
+
+class DisputeReasonField(Field):
+    def python_value(self, value):
+        if value is not None:
+            return Reason(type=value['DisputeReasonType'], message=value['DisputeReasonMessage'])
+
+        return value
+
+    def api_value(self, value):
+        value = super(DisputeReasonField, self).api_value(value)
+
+        if isinstance(value, Reason):
+            value = {
+                'DisputeReasonType': value.type,
+                'DisputeReasonMessage': str(value.message)
             }
 
         return value

@@ -198,6 +198,21 @@ class Money(object):
         return self.__class__(round(self.amount, ndigits), self.currency)
 
 
+class Reason(object):
+    def __init__(self, type=None, message=None):
+        self.type = type
+        self.message = message
+
+    def __str__(self):
+        return 'Reason: %s Message: %s' % (self.type, self.message)
+
+    def __eq__(self, other):
+        if isinstance(other, Reason):
+            return ((self.type == other.type) and
+                    (self.message == other.message))
+        return False
+
+
 # This code belongs to https://github.com/carljm/django-model-utils
 class Choices(object):
     """

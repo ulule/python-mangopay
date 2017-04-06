@@ -6,7 +6,7 @@ from .base import BaseApiModel
 from .fields import (PrimaryKeyField, EmailField, CharField,
                      BooleanField, DateTimeField, DateField,
                      ManyToManyField, ForeignKeyField,
-                     MoneyField, IntegerField)
+                     MoneyField, IntegerField, DisputeReasonField)
 
 from .compat import python_2_unicode_compatible
 from .query import InsertQuery, UpdateQuery, SelectQuery
@@ -549,3 +549,28 @@ class Notification(BaseModel):
         verbose_name = 'notification'
         verbose_name_plural = 'notifications'
         url = '/hooks'
+
+
+class Dispute(BaseModel):
+    initial_transaction_id = CharField(api_name='InitialTransactionId')
+    initial_transaction_type = CharField(api_name='InitialTransactionType', choices=constants.TRANSACTION_TYPE_CHOICES,
+                                         default=None)
+    result_code = CharField(api_name='ResultCode')
+    result_message = CharField(api_name='ResultMessage')
+    dispute_reason = DisputeReasonField(api_name='DisputeReason')
+    status = CharField(api_name='Status', choices=constants.DISPUTES_STATUS_CHOICES, default=None)
+    status_message = CharField(api_name='StatusMessage')
+    disputed_funds = MoneyField(api_name='DisputedFunds')
+    contested_funds = MoneyField(api_name='ContestedFunds')
+    repudiation_id = CharField(api_name='RepudiationId')
+    dispute_type = CharField(api_name='DisputeType', choices=constants.DISPUTE_TYPE_CHOICE, default=None)
+    contest_deadline_date = DateTimeField(api_name='ContestDeadlineDate')
+    creation_date = DateTimeField(api_name='CreationDate')
+
+    class Meta:
+        verbose_name = 'dispute'
+        verbose_name_plural = 'disputes'
+        url = '/disputes'
+
+    def __str__(self):
+        return 'Dispute n.%s tag:%s' % (self.id, self.tag)

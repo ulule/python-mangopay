@@ -385,7 +385,7 @@ class BankWirePayOut(BaseModel):
     bank_account = ForeignKeyField(BankAccount, api_name='BankAccountId', required=True)
     status = CharField(api_name='Status', choices=constants.STATUS_CHOICES, default=None)
     result_code = CharField(api_name='ResultCode')
-    execution_date = DateField(api_name='ExecutionDate')
+    execution_date = DateTimeField(api_name='ExecutionDate')
     type = CharField(api_name='Type', choices=constants.TRANSFER_TYPE_CHOICES, default=None)
     nature = CharField(api_name='Nature', choices=constants.NATURE_CHOICES, default=None)
     payment_type = CharField(api_name='PaymentType')

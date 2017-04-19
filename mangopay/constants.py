@@ -11,6 +11,11 @@ LEGAL_USER_TYPE_CHOICES = Choices(
     ('ORGANIZATION', 'organization', 'Organization')
 )
 
+KYC_USER_LEVEL_CHOICES = Choices(
+    ('LIGHT', 'light', 'Light'),
+    ('REGULAR', 'regular', 'Regular')
+)
+
 STATUS_CHOICES = Choices(
     ('CREATED', 'created', 'Created'),
     ('SUCCEEDED', 'succeeded', 'Succeeded'),

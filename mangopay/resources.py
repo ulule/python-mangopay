@@ -26,7 +26,9 @@ class User(BaseModel):
                             default=constants.USER_TYPE_CHOICES.natural,
                             required=True)
     kyc_level = CharField(
-        api_name='KYCLevel', choices=constants.KYC_USER_LEVEL_CHOICES)
+        api_name='KYCLevel',
+        default=constants.KYC_USER_LEVEL_CHOICES.light,
+        choices=constants.KYC_USER_LEVEL_CHOICES)
 
     class Meta:
         verbose_name = 'user'

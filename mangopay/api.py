@@ -75,7 +75,10 @@ class APIRequest(object):
 
         url = self._absolute_url(url, encoded_params)
 
-        logger.info('DATA[IN -> %s]\n\t- headers: %s\n\t- content: %s' % (url, headers, truncated_data))
+        cleaned_headers = headers
+        cleaned_headers['Authorization'] = '*' * len(cleaned_headers['Authorization'])
+        logger.info('DATA[IN -> %s]\n\t- headers: %s\n\t- content: %s' % (
+            url, cleaned_headers, truncated_data))
 
         ts = time.time()
 

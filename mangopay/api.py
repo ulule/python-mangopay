@@ -75,7 +75,7 @@ class APIRequest(object):
 
         url = self._absolute_url(url, encoded_params)
 
-        cleaned_headers = headers
+        cleaned_headers = headers.copy()
         cleaned_headers['Authorization'] = '*' * len(cleaned_headers['Authorization'])
         logger.info('DATA[IN -> %s]\n\t- headers: %s\n\t- content: %s' % (
             url, cleaned_headers, truncated_data))

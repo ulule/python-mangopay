@@ -193,7 +193,7 @@ class CardRegistration(BaseModel):
 
 class PayIn(BaseModel):
     fees = MoneyField(api_name='Fees', required=True)
-    credited_user = ForeignKeyField(User, api_name='CreditedUserId', required=True, related_name='credited_users')
+    credited_user = ForeignKeyField(User, api_name='CreditedUserId', required=True)
     credited_funds = MoneyField(api_name='CreditedFunds', required=True)
     credited_wallet = ForeignKeyField(Wallet, api_name='CreditedWalletId', required=True)
     debited_funds = MoneyField(api_name='DebitedFunds', required=True)
@@ -216,6 +216,7 @@ class PayIn(BaseModel):
 @python_2_unicode_compatible
 class DirectPayIn(PayIn):
     author = ForeignKeyField(User, api_name='AuthorId', required=True)
+    credited_user = ForeignKeyField(User, api_name='CreditedUserId', required=True)
     credited_wallet = ForeignKeyField(Wallet, api_name='CreditedWalletId', required=True)
     secure_mode_redirect_url = CharField(api_name='SecureModeRedirectURL')
     secure_mode_return_url = CharField(api_name='SecureModeReturnURL')
@@ -240,6 +241,7 @@ class DirectPayIn(PayIn):
 @python_2_unicode_compatible
 class BankWirePayIn(PayIn):
     author = ForeignKeyField(User, api_name='AuthorId', required=True)
+    credited_user = ForeignKeyField(User, api_name='CreditedUserId', required=True)
     credited_wallet = ForeignKeyField(Wallet, api_name='CreditedWalletId', required=True)
     declared_debited_funds = MoneyField(api_name='DeclaredDebitedFunds', required=True)
     declared_fees = MoneyField(api_name='DeclaredFees', required=True)
@@ -260,6 +262,7 @@ class BankWirePayIn(PayIn):
 
 class CardWebPayIn(PayIn):
     author = ForeignKeyField(User, api_name='AuthorId', required=True)
+    credited_user = ForeignKeyField(User, api_name='CreditedUserId', required=True)
     credited_wallet = ForeignKeyField(Wallet, api_name='CreditedWalletId', required=True)
     return_url = CharField(api_name='ReturnURL')
     template_url_options = CharField(api_name='TemplateURLOptions')
@@ -281,6 +284,7 @@ class CardWebPayIn(PayIn):
 
 class DirectDebitWebPayIn(PayIn):
     author = ForeignKeyField(User, api_name='AuthorId', required=True)
+    credited_user = ForeignKeyField(User, api_name='CreditedUserId', required=True)
     credited_wallet = ForeignKeyField(Wallet, api_name='CreditedWalletId', required=True)
     return_url = CharField(api_name='ReturnURL')
     template_url_options = CharField(api_name='TemplateURLOptions')
@@ -330,6 +334,7 @@ class PreAuthorization(BaseModel):
 class PreAuthorizedPayIn(PayIn):
     author = ForeignKeyField(User, api_name='AuthorId', required=True)
     debited_funds = MoneyField(api_name='DebitedFunds', required=True)
+    credited_user = ForeignKeyField(User, api_name='CreditedUserId', required=True)
     credited_wallet = ForeignKeyField(Wallet, api_name='CreditedWalletId', required=True)
     secure_mode_return_url = CharField(api_name='SecureModeReturnURL')
     preauthorization = ForeignKeyField(PreAuthorization, api_name='PreauthorizationId', required=True)

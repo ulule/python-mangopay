@@ -155,7 +155,12 @@ class APIRequest(object):
 
         headers = result.headers
 
-        logger.error('API ERROR: status_code: %s | url: %s | method: %s | data: %r | headers: %s | content: %s' % (
+        logging_method = logger.error
+
+        if status_code >= 400 and status_code < 500:
+            logging_method = logger.warn
+
+        logging_method('API ERROR: status_code: %s | url: %s | method: %s | data: %r | headers: %s | content: %s' % (
             status_code,
             url,
             method,

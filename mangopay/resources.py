@@ -428,6 +428,7 @@ class Refund(BaseModel):
     debited_wallet = ForeignKeyField(Wallet, api_name='DebitedWalletId', required=True)
     credited_wallet = ForeignKeyField(Wallet, api_name='CreditedWalletId', required=True)
     refund_reason = CharField(api_name='RefundReason')
+    payout = ForeignKeyField(BankWirePayOut, api_name='InitialTransactionId')
 
     class Meta:
         verbose_name = 'refund'

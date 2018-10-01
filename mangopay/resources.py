@@ -423,12 +423,12 @@ class Refund(BaseModel):
     result_code = CharField(api_name='ResultCode')
     result_message = CharField(api_name='ResultMessage')
     execution_date = DateField(api_name='ExecutionDate')
-    type = CharField(api_name='Type', choices=constants.TRANSFER_TYPE_CHOICES, default=None)
+    type = CharField(api_name='Type', choices=constants.TRANSACTION_TYPE_CHOICES, default=None)
     nature = CharField(api_name='Nature', choices=constants.NATURE_CHOICES, default=None)
     debited_wallet = ForeignKeyField(Wallet, api_name='DebitedWalletId', required=True)
     credited_wallet = ForeignKeyField(Wallet, api_name='CreditedWalletId', required=True)
     refund_reason = CharField(api_name='RefundReason')
-    payout = ForeignKeyField(BankWirePayOut, api_name='InitialTransactionId')
+    initial_transaction_id = CharField(api_name='InitialTransactionId')
 
     class Meta:
         verbose_name = 'refund'

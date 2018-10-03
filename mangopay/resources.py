@@ -225,6 +225,7 @@ class DirectPayIn(PayIn):
                             choices=constants.SECURE_MODE_CHOICES,
                             default=constants.SECURE_MODE_CHOICES.default)
     creation_date = DateField(api_name='CreationDate')
+    statement_descriptor = CharField(api_name='StatementDescriptor')
 
     class Meta:
         verbose_name = 'payin'
@@ -272,6 +273,7 @@ class CardWebPayIn(PayIn):
                             choices=constants.SECURE_MODE_CHOICES,
                             default=constants.SECURE_MODE_CHOICES.default)
     redirect_url = CharField(api_name='RedirectURL')
+    statement_descriptor = CharField(api_name='StatementDescriptor')
 
     class Meta:
         verbose_name = 'card_payin'
@@ -341,6 +343,7 @@ class PreAuthorizedPayIn(PayIn):
     secure_mode = CharField(api_name='SecureMode',
                             choices=constants.SECURE_MODE_CHOICES,
                             default=constants.SECURE_MODE_CHOICES.default)
+    statement_descriptor = CharField(api_name='StatementDescriptor')
 
     class Meta:
         verbose_name = 'preauthorized_payin'

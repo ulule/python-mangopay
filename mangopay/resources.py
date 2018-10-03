@@ -322,6 +322,7 @@ class PreAuthorization(BaseModel):
     secure_mode_return_url = CharField(api_name='SecureModeReturnURL', required=True)
     expiration_date = DateField(api_name='ExpirationDate')
     payin = ForeignKeyField(PayIn, api_name='PayInId')
+    statement_descriptor = CharField(api_name='StatementDescriptor')
 
     class Meta:
         verbose_name = 'preauthorization'

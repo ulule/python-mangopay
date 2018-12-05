@@ -375,6 +375,7 @@ class BankAccount(BaseModel):
     branch_code = CharField(api_name='BranchCode')
     country = CharField(api_name='Country')
     bic = CharField(api_name='BIC')
+    active = BooleanField(api_name='Active', default=True)
 
     class Meta:
         verbose_name = 'bankaccount'

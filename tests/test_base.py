@@ -7,7 +7,9 @@ from exam.decorators import fixture
 from . import settings
 from .mocks import RegisteredMocks
 from .resources import (NaturalUser, LegalUser, Wallet,
-                        CardRegistration, Card)
+                        CardRegistration, Card, UboDeclaration,
+                        Ubo)
+from mangopay.utils import Address, Birthplace
 
 import responses
 import time
@@ -178,3 +180,53 @@ class BaseTest(RegisteredMocks):
         card = Card.get(card_registration.card.get_pk())
 
         return card
+
+    @fixture
+    def legal_user_ubo_declaration(self):
+        self.mock_declarative_user()
+        self.mock_ubo_declaration()
+
+        params = {
+            "first_name": "Victor",
+            "last_name": "Hugo",
+            "address": Address(address_line_1='AddressLine1', address_line_2='AddressLine2',
+                               city='City', region='Region',
+                               postal_code='11222', country='FR'),
+            "birthday": 1231432,
+            "nationality": "FR",
+            "country_of_residence": "FR",
+            "occupation": "Writer",
+            "income_range": 6,
+            "proof_of_identity": None,
+            "proof_of_address": None,
+            "person_type": "NATURAL",
+            "email": "victor@hugo.com",
+            "tag": "custom tag",
+            "capacity": "DECLARATIVE"
+        }
+        user = NaturalUser(**params)
+        user.save()
+
+        params = {
+            "user": user,
+            "creation_date": 1554803756
+        }
+
+        ubo_declaration = UboDeclaration(**params)
+        ubo_declaration.save()
+        return ubo_declaration, user
+
+    @fixture
+    def ubo_declaration_ubo(self):
+        params = {
+            "first_name": "Victor",
+            "last_name": "Hugo",
+            "address": Address(address_line_1='AddressLine1', address_line_2='AddressLine2',
+                               city='City', region='Region',
+                               postal_code='11222', country='FR'),
+            "birthday": 1231432,
+            "nationality": "FR",
+            "birthplace": Birthplace(city='Paris', country='FR')
+        }
+        ubo = Ubo(**params)
+        return ubo

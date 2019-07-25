@@ -3,7 +3,8 @@ import time
 import datetime
 import six
 
-from .utils import timestamp_from_datetime, timestamp_from_date, Money, Reason
+from .utils import (Address, timestamp_from_datetime, timestamp_from_date,
+                    Money, Reason, Birthplace)
 import sys
 
 
@@ -370,3 +371,47 @@ class ManyToManyRelatedObject(object):
 
     def __set__(self, instance, objs):
         setattr(instance, self.field_name, [obj.get_pk() for obj in objs])
+
+
+class BirthplaceField(Field):
+    def python_value(self, value):
+        if value is not None:
+            return Birthplace(city=value['City'], country=value['Country'])
+
+        return value
+
+    def api_value(self, value):
+        value = super(BirthplaceField, self).api_value(value)
+
+        if isinstance(value, Birthplace):
+            value = {
+                'City': value.city,
+                'Country': value.country,
+            }
+
+        return value
+
+
+class AddressField(Field):
+    def python_value(self, value):
+        if value is not None:
+            return Address(address_line_1=value['AddressLine1'], address_line_2=value['AddressLine2'],
+                           city=value['City'], region=value['Region'],
+                           postal_code=value['PostalCode'], country=value['Country'])
+
+        return value
+
+    def api_value(self, value):
+        value = super(AddressField, self).api_value(value)
+
+        if isinstance(value, Address):
+            value = {
+                'AddressLine1': value.address_line_1,
+                'AddressLine2': value.address_line_2,
+                'City': value.city,
+                'Region': value.region,
+                'PostalCode': value.postal_code,
+                'Country': value.country
+            }
+
+        return value

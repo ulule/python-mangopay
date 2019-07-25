@@ -66,10 +66,10 @@ class APIRequest(object):
 
         truncated_data = None
 
-        if data:
+        if data or data == {}:
             truncated_data = truncatechars(copy.copy(data))
 
-            data = json.dumps(data)
+            data = json.dumps(data, default=lambda x: x.to_api_json())
 
         encoded_params = urlrequest.urlencode(params)
 

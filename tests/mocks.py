@@ -51,6 +51,14 @@ class RegisteredMocks(unittest.TestCase):
             'status': 200
         })
 
+    def mock_declarative_user(self):
+        self.register_mock({
+            'method': responses.POST,
+            'url': 'https://api.sandbox.mangopay.com/v2/chouette/users/natural',
+            'body': get_fixture('declarative_user') % time.mktime(date.today().timetuple()),
+            'status': 200
+        })
+
     def mock_legal_user(self):
         self.register_mock({
             'method': responses.POST,
@@ -214,4 +222,60 @@ class RegisteredMocks(unittest.TestCase):
             'body': get_fixture('user_list_2_per_page'),
             'status': 200,
             'match_querystring': True
+        })
+
+    def mock_ubo_declaration(self):
+        self.register_mock({
+            'method': responses.POST,
+            'url': 'https://api.sandbox.mangopay.com/v2/chouette/users/11694190/kyc/ubodeclarations',
+            'body': get_fixture('ubo_declaration') % '"Default Tag"',
+            'status': 200
+        })
+
+    def mock_list_ubo_declarations(self):
+        self.register_mock({
+            'method': responses.GET,
+            'url': 'https://api.sandbox.mangopay.com/v2/chouette/users/11694190/kyc/ubodeclarations',
+            'body': get_fixture('list_ubo_declarations') % '"Default Tag"',
+            'status': 200
+        })
+
+    def mock_get_ubo_declaration(self):
+        self.register_mock({
+            'method': responses.GET,
+            'url': 'https://api.sandbox.mangopay.com/v2/chouette/users/11694190/kyc/ubodeclarations/122341',
+            'body': get_fixture('ubo_declaration') % '"Default Tag"',
+            'status': 200
+        })
+
+    def mock_ubo_creation(self):
+        self.register_mock({
+            'method': responses.POST,
+            'url': 'https://api.sandbox.mangopay.com/v2/chouette/users/11694190/kyc/ubodeclarations/122341/ubos',
+            'body': get_fixture('ubo'),
+            'status': 200
+        })
+
+    def mock_get_ubo(self):
+        self.register_mock({
+            'method': responses.GET,
+            'url': 'https://api.sandbox.mangopay.com/v2/chouette/users/11694190/kyc/ubodeclarations/122341/ubos/1232432',
+            'body': get_fixture('ubo'),
+            'status': 200
+        })
+
+    def mock_submit_ubo_declaration(self):
+        self.register_mock({
+            'method': responses.PUT,
+            'url': 'https://api.sandbox.mangopay.com/v2/chouette/users/11694190/kyc/ubodeclarations/122341',
+            'body': get_fixture('ubo_declaration_submit') % '"Default Tag"',
+            'status': 200
+        })
+
+    def mock_update_ubo(self):
+        self.register_mock({
+            'method': responses.PUT,
+            'url': 'https://api.sandbox.mangopay.com/v2/chouette/users/11694190/kyc/ubodeclarations/122341/ubos/1232432',
+            'body': get_fixture('ubo_update'),
+            'status': 200
         })

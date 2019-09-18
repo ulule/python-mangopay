@@ -90,6 +90,7 @@ class LegalUser(User):
     statute = CharField(api_name='Statute')
     proof_of_registration = CharField(api_name='ProofOfRegistration')
     shareholder_declaration = CharField(api_name='ShareholderDeclaration')
+    company_number = CharField(api_name='CompanyNumber')
 
     class Meta:
         verbose_name = 'user'

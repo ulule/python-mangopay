@@ -6,7 +6,8 @@ from .base import BaseApiModel
 from .fields import (PrimaryKeyField, EmailField, CharField,
                      BooleanField, DateTimeField, DateField,
                      ManyToManyField, ForeignKeyField,
-                     MoneyField, IntegerField, DisputeReasonField)
+                     MoneyField, IntegerField, DisputeReasonField,
+                     AddressField, ListField, BirthplaceField)
 
 from .compat import python_2_unicode_compatible
 from .query import InsertQuery, UpdateQuery, SelectQuery
@@ -89,6 +90,7 @@ class LegalUser(User):
     statute = CharField(api_name='Statute')
     proof_of_registration = CharField(api_name='ProofOfRegistration')
     shareholder_declaration = CharField(api_name='ShareholderDeclaration')
+    company_number = CharField(api_name='CompanyNumber')
 
     class Meta:
         verbose_name = 'user'
@@ -589,3 +591,59 @@ class Dispute(BaseModel):
 
     def __str__(self):
         return 'Dispute n.%s tag:%s' % (self.id, self.tag)
+
+
+class UboDeclaration(BaseModel):
+    creation_date = IntegerField(api_name='CreationDate')
+    processed_date = IntegerField(api_name='ProcessedDate')
+    reason = CharField(api_name='Reason')
+    message = CharField(api_name='Message')
+    status = CharField(api_name='Status', choices=constants.UBO_DECLARATION_STATUS_CHOICES, default=None)
+    ubos = ListField(api_name='Ubos')
+    user = ForeignKeyField(User)
+
+    class Meta:
+        verbose_name = 'ubodeclaration'
+        verbose_name_plural = 'ubodeclarations'
+
+        # For Update as well as Select, 'ubo_declaration_id' is provided by the 'reference' param of the update method
+        url = {
+            InsertQuery.identifier: '/users/%(user_id)s/kyc/ubodeclarations',
+            UpdateQuery.identifier: '/users/%(user_id)s/kyc/ubodeclarations',
+            SelectQuery.identifier: '/users/%(user_id)s/kyc/ubodeclarations'
+        }
+
+    def get_read_only_properties(self):
+        read_only = ["ProcessedDate", "Reason", "Message"]
+        return read_only
+
+    def get_sub_objects(self, sub_objects=None):
+        sub_objects['Ubos'] = Ubo
+        return sub_objects
+
+
+class Ubo(BaseModel):
+    first_name = CharField(api_name='FirstName', required=True)
+    last_name = CharField(api_name='LastName', required=True)
+    address = AddressField(api_name='Address', required=True)
+    nationality = CharField(api_name='Nationality', required=True)
+    birthday = IntegerField(api_name='Birthday', required=True)
+    birthplace = BirthplaceField(api_name='Birthplace', required=True)
+    user = ForeignKeyField(User)
+    ubo_declaration = ForeignKeyField(UboDeclaration)
+
+    class Meta:
+        verbose_name = 'ubo'
+        verbose_name_plural = 'ubos'
+
+        # For Update, 'ubo_id' is provided by the 'reference' param of the update method
+        url = {
+            InsertQuery.identifier: '/users/%(user_id)s/kyc/ubodeclarations/%(ubo_declaration_id)s/ubos',
+            UpdateQuery.identifier: '/users/%(user_id)s/kyc/ubodeclarations/%(ubo_declaration_id)s/ubos',
+            SelectQuery.identifier: '/users/%(user_id)s/kyc/ubodeclarations/%(ubo_declaration_id)s/ubos/%(ubo_id)s'
+        }
+
+    def get_sub_objects(self, sub_objects=None):
+        sub_objects['Address'] = Address
+        sub_objects['Birthplace'] = Birthplace
+        return sub_objects

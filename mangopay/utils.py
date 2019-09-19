@@ -198,6 +198,42 @@ class Money(object):
         return self.__class__(round(self.amount, ndigits), self.currency)
 
 
+class Address(object):
+    def __init__(self, address_line_1=None, address_line_2=None, city=None, region=None,
+                 postal_code=None, country=None):
+        self.address_line_1 = address_line_1
+        self.address_line_2 = address_line_2
+        self.city = city
+        self.region = region
+        self.postal_code = postal_code
+        self.country = country
+
+    def __str__(self):
+        return 'Address: %s, %s , %s, %s, %s , %s' % \
+               (self.address_line_1, self.address_line_2, self.postal_code, self.city, self.region, self.country)
+
+    def __eq__(self, other):
+        if isinstance(other, Address):
+            stat = ((self.address_line_1 == other.address_line_1) and
+                    (self.address_line_2 == other.address_line_2) and
+                    (self.postal_code == other.postal_code) and
+                    (self.city == other.city) and
+                    (self.region == other.region) and
+                    (self.country == other.country))
+            return stat
+        return False
+
+    def to_api_json(self):
+        return {
+            "AddressLine1": self.address_line_1,
+            "AddressLine2": self.address_line_2,
+            "PostalCode": self.postal_code,
+            "City": self.city,
+            "Region": self.region,
+            "Country": self.country,
+        }
+
+
 class Reason(object):
     def __init__(self, type=None, message=None):
         self.type = type
@@ -211,6 +247,28 @@ class Reason(object):
             return ((self.type == other.type) and
                     (self.message == other.message))
         return False
+
+
+class Birthplace(object):
+    def __init__(self, city=None, country=None):
+        self.city = city
+        self.country = country
+
+    def __str__(self):
+        return 'Birthplace: %s, %s' % (self.city, self.country)
+
+    def __eq__(self, other):
+        if isinstance(other, Birthplace):
+            stat = ((self.city == other.city) and
+                    (self.country == other.country))
+            return stat
+        return False
+
+    def to_api_json(self):
+        return {
+            "City": self.city,
+            "Country": self.country,
+        }
 
 
 # This code belongs to https://github.com/carljm/django-model-utils

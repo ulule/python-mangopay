@@ -152,3 +152,28 @@ DISPUTE_TYPE_CHOICE = Choices(
     ('NOT_CONTESTABLE', 'not_contestable', 'Not Contestable'),
     ('RETRIEVAL', 'retrieval', 'Retrieval')
 )
+
+UBO_DECLARATION_STATUS_CHOICES = Choices(
+    ("CREATED", "created", "Created"),
+    ("VALIDATION_ASKED", "validation_asked", "Validation Asked"),
+    ("VALIDATED", "validated", "Validated"),
+    ("REFUSED", "refused", "Refused"),
+    ("INCOMPLETE", "incomplete", "Incomplete")
+)
+
+UBO_DECLARATION_REFUSED_REASON_CHOICES = Choices(
+    ("MISSING_UBO", "missing_ubo", "Missing UBO"),
+    ("DECLARATION_DO_NOT_MATCH_UBO_INFORMATION", "declaration_do_not_match_ubo_information", "Declaration Do Not "
+                                                                                             "Match UBO Information")
+)
+
+DECLARED_UBO_STATUS_CHOICES = Choices(
+    ("CREATED", "created", "Created"),
+    ("VALIDATED", "validated", "Validated"),
+    ("REFUSED", "refused", "Refused")
+)
+
+DECLARED_UBO_REFUSED_REASON_CHOICES = Choices(
+    ("INVALID_DECLARED_UBO", "invalid_declared_ubo", "Invalid Declared UBO"),
+    ("INVALID_UBO_DETAILS", "invalid_ubo_details", "Invalid UBO Details")
+)
